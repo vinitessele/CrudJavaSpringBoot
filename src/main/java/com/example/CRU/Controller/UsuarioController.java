@@ -3,6 +3,7 @@ package com.example.CRU.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +21,16 @@ import com.example.CRU.UsuarioRepository.UsuarioRepository;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 	 @Autowired
-	    private UsuarioRepository usuarioRepository;
-
+	 private UsuarioRepository usuarioRepository;
+    @GetMapping("/assessment")
+    public String index() {
+        return "index";
+    }
     @GetMapping
     public List<Usuario> listarUsuarios() {
     	  return usuarioRepository.findAll();
     }
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping
     public Usuario criarUsuario(@RequestBody Usuario usuario) {
     	return usuarioRepository.save(usuario);
